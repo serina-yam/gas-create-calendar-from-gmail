@@ -1,9 +1,13 @@
 # gas-create-calender-from-gmail
-GMailの情報を取得して予定をGoogle Calendarに登録するGAS。  
+GMailの情報を取得して予定をGoogleカレンダーに登録するGAS。  
 該当のGMailはカレンダー登録処理の後に既読にする。
 
 GASの自動実行のタイミングは適宜設定。  
 （私は15分おきに設定）
+
+## 作成した背景
+
+QQEnglishとレアジョブのオンラインレッスン予定を自動でgoogleカレンダーに登録したい！と思い作成。
 
 ## 処理の流れ
 
