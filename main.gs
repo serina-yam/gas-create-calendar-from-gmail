@@ -21,7 +21,13 @@ const MAIL_SETTINGS = [
 function main() {
   MAIL_SETTINGS.forEach(setting => {
     eachMessage_(setting.criteria, message => {
-      processMessage_(message, setting.titlePrefix, setting.colorId, setting.extractInfo);
+      try {
+        processMessage_(message, setting.titlePrefix, setting.colorId, setting.extractInfo);
+        message.markRead(); // カレンダー登録成功後に既読にする
+      } catch (e) {
+        Logger.log(`Error processing message: ${e.message}`);
+        // エラーが発生した場合はメールを既読にしない
+      }
     });
   });
 }
