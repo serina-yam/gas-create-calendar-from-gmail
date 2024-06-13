@@ -42,7 +42,6 @@ function eachMessage_(criteria, callback) {
   GmailApp.search(criteria).forEach(thread => {
     thread.getMessages().forEach(message => {
       callback(message); // メールを処理するコールバック関数を呼び出す
-      message.markRead(); // メールを既読にする
     });
   });
 }
