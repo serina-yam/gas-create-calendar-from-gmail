@@ -1,4 +1,4 @@
-# gas-create-calender-from-gmail
+# 概要
 GMailの情報を取得して予定をGoogleカレンダーに登録するGAS。  
 該当のGMailはカレンダー登録処理の後に既読にする。
 
