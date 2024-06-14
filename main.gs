@@ -82,7 +82,6 @@ function eachMessage_(criteria, callback) {
 function processMessage_(message, titlePrefix, colorId, extractInfo) {
   const cal = CalendarApp.getDefaultCalendar();
   const body = message.getBody(); // メールの本文を取得
-  const subject = message.getSubject(); // メールの件名を取得
   
   // メールから日時やカリキュラム情報を抽出
   const { startDateString, startTimeString, endTimeString, curriculum } = extractInfo(body);
