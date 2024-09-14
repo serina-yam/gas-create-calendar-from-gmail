@@ -102,19 +102,29 @@ function processMessage_(message, titlePrefix, colorId, extractInfo) {
  * @param {GmailMessage} message - 処理対象のGmailメッセージ
  * @param {function} extractCancelInfo - キャンセルメールから情報を抽出する関数
  */
-function processCancelMessage_(message, extractCancelInfo) {
+function processCancelMessage_(message, setting) {
   const cal = CalendarApp.getDefaultCalendar();
   const body = message.getBody(); // メールの本文を取得
-  
+
   // メールからキャンセルされた日時情報を抽出
-  const { startDateString, startTimeString, endTimeString } = extractCancelInfo(body);
-  
+  const { startDateString, startTimeString, endTimeString } = setting.extractCancelInfo(body);
+
   const startTime = new Date(`${startDateString}T${startTimeString}:00`); // イベントの開始時刻
   const endTime = new Date(`${startDateString}T${endTimeString}:00`); // イベントの終了時刻
 
   // 指定された時間範囲内のイベントを検索し、該当するイベントを削除します
   const events = cal.getEvents(startTime, endTime);
-  events.forEach(event => event.deleteEvent());
+  console.log();
+
+  events.forEach(event => {
+    
+    const title = event.getTitle();
+    const isExist = title.indexOf('QQ/') !== -1 || title.indexOf('レアジョブ') !== -1; // NOTE: 2種類しかないので、ひとまずべた書き
+    if (isExist) {
+      event.deleteEvent();
+      Logger.log(`Deleted: [${title}] ${event.getStartTime().toLocaleString()} - ${event.getEndTime().toLocaleString()}`);
+    }
+  });
 }
 
 /**
